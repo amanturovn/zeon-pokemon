@@ -1,0 +1,10 @@
+.pokemons__section {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pokemons__section li {
+  margin: 10px;
+}
+.pokemon-img {
+  width: 200px;
+}
