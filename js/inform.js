@@ -1,12 +1,4 @@
 let id = location.search.substring(1);
-// document
-//   .querySelector(".pokemons__section")
-//   .addEventListener("click", function () {
-//     // e.preventDefault();
-
-//     getPokemonInf();
-//   });
-// console.log(asd);
 const API2 =
   "https://pokeapi.co/api/v2/pokemon/" + location.search.substring(1);
 async function getPokemonInf() {

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/header_css/style.css" />
     <link rel="stylesheet" href="./css/main_css/style.css" />
     <link rel="stylesheet" href="./css/inform_css/style.css" />
+    <link rel="stylesheet" href="./css/favorites_css/style.css" />
     <title>Pokemons</title>
   </head>
   <body>
@@ -30,12 +31,14 @@
           <button class="sort__up">A-Z</button>
           <button class="sort__down">Z-A</button>
 
-          <!-- <button class="sort__prev">Previous</button>
-          <button class="sort__next">Next</button> -->
+          <button class="fovarites">Fovarites</button>
+          <!-- <button class="sort__next">Next</button> -->
         </nav>
       </div>
       <div class="pokemons">
-        <ul class="pokemons__section"></ul>
+        <ul class="pokemons__section">
+          <!-- <div class="favorites__cart"></div> -->
+        </ul>
       </div>
       <div class="pagination"></div>
       <button class="sort__prev">Previous</button>
@@ -62,12 +65,39 @@
         </nav>
       </div>
       <h1>POKEMON INFORMATION</h1>
-      <div class="main_inner"></div>
+      <div class="main_inner">
+        <!-- <button class="favorites__cart"></button> -->
+      </div>
       <button class="main__back">Назад</button>
+    </div>
+    <div style="display: none" class="main__favorites container">
+      <div class="header__title">
+        <h1>PokeApi</h1>
+        <nav class="header__nav">
+          <input
+            class="input"
+            type="text"
+            name=""
+            id=""
+            placeholder="search..."
+          />
+          <h3>SORT:</h3>
+
+          <button class="sort__up">A-Z</button>
+          <button class="sort__down">Z-A</button>
+
+          <button class="fovarites">Fovarites</button>
+          <!-- <button class="sort__next">Next</button> -->
+        </nav>
+      </div>
+      <div class="main__favorites_card"></div>
+      <button class="favorite__bnt">back</button>
     </div>
     <script src="./js/main.js"></script>
     <!-- <script src="./js/script.js"></script> -->
     <!-- <script src="./js/about.js"></script> -->
+    <script src="./js/localStorage.js"></script>
+    <script src="./js/favorites.js"></script>
     <script src="./js/inform.js"></script>
   </body>
 </html>

@@ -94,7 +94,9 @@ function displayCharacters(character) {
         .then(res => res.json())
         .catch(err => console.log(err));
       // console.log(res);
+
       const postMain = document.createElement("div");
+      // const  = document.querySelector(".favorites__cart");
       postMain.classList.add("main__post");
       const postLi = document.createElement("li");
       postLi.classList.add("post__list");
@@ -103,8 +105,9 @@ function displayCharacters(character) {
       postA.href = "?" + res.id;
       const postIcon = document.createElement("img");
       postIcon.style.width = "30px";
-      // postIcon.style.backgroundColor = "red";
+      postIcon.classList.add("postIcon");
       postIcon.src = "./css/img/bookmark.png";
+      postIcon.id = res.id;
       const postImg = document.createElement("img");
       postImg.src = res.sprites.front_shiny;
       const postDiv = document.createElement("div");

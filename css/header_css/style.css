@@ -58,6 +58,9 @@ button:hover {
 .sort__prev {
   margin-left: 90px;
 }
+.fovarites {
+  margin-left: 40px;
+}
 .header__title {
   height: 90px;
   max-width: 1000px;
