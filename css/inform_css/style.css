@@ -1,0 +1,22 @@
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  /* margin-top: 50px; */
+}
+
+.main_inner {
+  padding: 40px 20px;
+  border: 1px solid black;
+  max-width: 450px;
+  /* height: 400px; */
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px;
+}
+.main_inner:hover {
+  background-color: rgb(203, 227, 252);
+}

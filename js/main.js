@@ -13,9 +13,10 @@ sort__prev.addEventListener("click", function () {
   loadCharactersPrev(responsApi);
 });
 async function loadCharactersNext() {
+  postsEl.innerHTML = "";
   try {
     const res = await fetch(
-      "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
+      "https://pokeapi.co/api/v2/pokemon?offset=42&limit=42 "
     );
     let hpCharac = await res.json();
     responsApi = hpCharac.results;
@@ -27,9 +28,10 @@ async function loadCharactersNext() {
   }
 }
 async function loadCharactersPrev() {
+  postsEl.innerHTML = "";
   try {
     const res = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20"
+      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=42"
     );
     let hpCharac = await res.json();
     responsApi = hpCharac.results;
@@ -43,27 +45,37 @@ async function loadCharactersPrev() {
 sort__up.addEventListener("click", function () {
   postsEl.innerHTML = "";
   const sortA = responsApi.sort((a, b) => a.name.localeCompare(b.name));
-  console.log(sortA);
+  // console.log(sortA);
   displayCharacters(sortA);
 });
 sort__down.addEventListener("click", function () {
   postsEl.innerHTML = "";
   const sortZ = responsApi.sort((a, b) => b.name.localeCompare(a.name));
-  console.log(sortZ);
+  // console.log(sortZ);
   displayCharacters(sortZ);
 });
 input.addEventListener("keyup", e => {
   postsEl.innerHTML = "";
   const searchString = e.target.value.toLowerCase();
-  console.log(searchString);
   const filterCgaracters = responsApi.filter(character => {
     return character.name.toLowerCase().includes(searchString);
   });
+  if (filterCgaracters.length === 0) {
+    postsEl.innerHTML = "Not found ...";
+    sort__next.classList.add("hide");
+    sort__prev.classList.add("hide");
+  } else {
+    sort__next.classList.remove("hide");
+    sort__prev.classList.remove("hide");
+  }
+  console.log(filterCgaracters, searchString);
   displayCharacters(filterCgaracters);
 });
 async function loadCharactersPokemons() {
   try {
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
+    const res = await fetch(
+      "https://pokeapi.co/api/v2/pokemon?limit=42&offset=0"
+    );
     let hpCharac = await res.json();
     responsApi = hpCharac.results;
     // loadPok(responsApi);
@@ -73,37 +85,9 @@ async function loadCharactersPokemons() {
   }
 }
 loadCharactersPokemons();
-// function loadPok(responsApi) {
-//   responsApi.forEach(element => {
-//     async function loadCharacters() {
-//       try {
-//         const resApi = await fetch(element.url);
-//         let hpCharacters = await resApi.json();
-//         // console.log(hpCharacters);
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     }
-//     loadCharacters();
-//   });
-// }
 
-// jkghj==========================================
-// function displayCharacters(character) {
-//   console.log(character);
-//   const postDiv = character
-//     .map((character, index) => {
-//       // console.log(index);
-//       return `<a  href="${"?" + (index + 1)}"><li><div>${character.name}</div>
-//       <div>${index + 1}</div>
-//       <img class="pokemon-img" src="./css/img/pokemon.jpg" /></li></a>
-//       `;
-//     })
-//     .join("");
-//   postsEl.innerHTML = postDiv;
-// }
-// hjkl==================================================
 function displayCharacters(character) {
+  // console.log(character);
   character.forEach(element => {
     async function loadCharacters() {
       let res = await fetch(element.url)
@@ -111,31 +95,28 @@ function displayCharacters(character) {
         .catch(err => console.log(err));
       // console.log(res);
       const postMain = document.createElement("div");
+      postMain.classList.add("main__post");
       const postLi = document.createElement("li");
+      postLi.classList.add("post__list");
       const postA = document.createElement("a");
+      postA.classList.add("post__link");
       postA.href = "?" + res.id;
+      const postIcon = document.createElement("img");
+      postIcon.style.width = "30px";
+      // postIcon.style.backgroundColor = "red";
+      postIcon.src = "./css/img/bookmark.png";
       const postImg = document.createElement("img");
-      postImg.src = res.sprites.front_default;
+      postImg.src = res.sprites.front_shiny;
       const postDiv = document.createElement("div");
-      postDiv.textContent = res.name;
+      postDiv.textContent = res.name.toUpperCase();
       postLi.appendChild(postImg);
       postLi.appendChild(postDiv);
       postA.appendChild(postLi);
       postMain.appendChild(postA);
+      postMain.appendChild(postIcon);
       postsEl.appendChild(postMain);
     }
     loadCharacters();
   });
-
-  // console.log(character);
-  // const postDiv = character
-  //   .map((character, index) => {
-  //     // console.log(index);
-  //     return `<a  href="${"?" + (index + 1)}"><li><div>${character.name}</div>
-  //     <div>${index + 1}</div>
-  //     <img class="pokemon-img" src="./css/img/pokemon.jpg" /></li></a>
-  //     `;
-  //   })
-  //   .join("");
-  // postsEl.innerHTML = postDiv;
 }
+// console.log(event.target);
