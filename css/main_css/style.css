@@ -23,6 +23,9 @@ ul li {
   flex-wrap: wrap;
   justify-content: center;
 }
+.main {
+  padding: 10px;
+}
 .main__post {
   width: 200px;
   border-radius: 5px;
@@ -56,4 +59,10 @@ ul li {
 
 .wrap {
   margin-bottom: 60px;
+}
+
+.main__inner_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

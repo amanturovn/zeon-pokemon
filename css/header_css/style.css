@@ -79,3 +79,68 @@ button:hover {
 .hide {
   display: none;
 }
+
+/* hamburger  =================*/
+.gamburger {
+  display: none;
+}
+.burger__menu {
+  margin: 0 auto;
+  display: flex;
+  justify-content: end;
+}
+.menu-btn {
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background: #181818;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-btn-burger {
+  width: 30px;
+  height: 4px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-btn-burger::after,
+.menu-btn-burger::before {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  content: "";
+  width: 30px;
+  height: 4px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-btn-burger::after {
+  transform: translateY(-12px);
+}
+
+.menu-btn-burger::before {
+  transform: translateY(12px);
+}
+/* hamburger  =================*/
+
+@media (max-width: 780px) {
+  .gamburger {
+    display: block;
+  }
+  .nav__none {
+    display: none;
+  }
+}
+
+.backColor {
+  background-color: rgb(238, 242, 2);
+}

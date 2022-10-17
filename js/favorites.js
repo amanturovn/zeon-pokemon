@@ -16,22 +16,25 @@ async function getValueSelect() {
     console.log(asd);
     const temp = JSON.parse(JSON.stringify(result));
     temp.forEach((element, id) => {
-      // console.log(element);
       if (asd.indexOf(id) !== -1) {
-        // favorites_card.innerHTML = "";
+        const favorites_about = document.createElement("div");
+        favorites_about.classList.add("favorites_about");
         const favorites_name = document.createElement("div");
         const favorites_link = document.createElement("a");
         const postIcon = document.createElement("img");
         postIcon.style.width = "30px";
+        postIcon.style.height = "30px";
         postIcon.classList.add("postIcon");
         postIcon.src = "./css/img/bookmark.png";
         postIcon.id = id + 1;
-        favorites_name.textContent = element.name;
+        favorites_name.textContent = element.name.toUpperCase();
         favorites_link.href = element.url;
         favorites_link.textContent = element.url;
-        favorites_card.append(favorites_name);
-        favorites_card.append(favorites_link);
-        favorites_card.append(postIcon);
+        favorites_about.append(favorites_link);
+        favorites_about.append(favorites_name);
+        favorites_about.append(favorites_link);
+        favorites_about.append(postIcon);
+        favorites_card.append(favorites_about);
       }
     });
     let favoriteEmpty = document.createElement("div");
@@ -77,31 +80,24 @@ class LocalStorageFavorites {
     if (index === -1) {
       pokemons.push(id);
       pushPokempns = true;
-      // alert("added to cart");
     } else {
       pokemons.splice(index, 1);
-      // alert("removed from cart");
     }
     localStorage.setItem(this.keyName, JSON.stringify(pokemons));
   }
 }
-
 const localStorageA = new LocalStorageFavorites();
 
 document
   .querySelector(".main__favorites_card")
   .addEventListener("click", function (e) {
-    // let localId = e.target.id;
-
     localStorageA.putPokemons(e.target.id);
-    // getFavorites();
-    // main__favorites.style.display = "block";
-    // wrap.style.display = "none";
     favorites_card.innerHTML = "";
     getValueSelect();
-    // location.reload();
-    // const icon = document.querySelector(".pokemons__section");
-    // icon.style.backroundColor = "red";
+    const icon = document.querySelectorAll(".postIcon");
+    icon.forEach(item => {
+      if (item.id == e.target.id) {
+        item.classList.remove("backColor");
+      }
+    });
   });
-
-//! ======================

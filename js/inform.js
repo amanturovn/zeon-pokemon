@@ -12,6 +12,7 @@ async function getPokemonInf() {
   main.style.display = "block";
   wrap.style.display = "none";
   const main__inner_div = document.createElement("div");
+  main__inner_div.classList.add("main__inner_div");
   const main__inner_images = document.createElement("div");
   const main__inner_name = document.createElement("div");
   const main__inner_order = document.createElement("div");

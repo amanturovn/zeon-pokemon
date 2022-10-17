@@ -1,0 +1,25 @@
+.favorite_wrap {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.favorites_about {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 500px;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.favorites_about:hover {
+  background-color: rgb(203, 227, 252);
+}
+
+@media (max-width: 380px) {
+  .favorites__title {
+    display: none;
+  }
+}

@@ -4,8 +4,10 @@ let sort__up = document.querySelector(".sort__up");
 let sort__down = document.querySelector(".sort__down");
 let sort__next = document.querySelector(".sort__next");
 let sort__prev = document.querySelector(".sort__prev");
+let loader = document.querySelector(".pre-loader");
+let pageValue = 1;
+let offset;
 let responsApi = [];
-// console.log(responsApi);
 sort__next.addEventListener("click", function () {
   loadCharactersNext(responsApi);
 });
@@ -14,14 +16,15 @@ sort__prev.addEventListener("click", function () {
 });
 async function loadCharactersNext() {
   postsEl.innerHTML = "";
+  ++pageValue;
+  offset = pageValue * 42 - 42;
   try {
     const res = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?offset=42&limit=42 "
+      "https://pokeapi.co/api/v2/pokemon?offset=" + offset + "&limit=42 "
     );
     let hpCharac = await res.json();
     responsApi = hpCharac.results;
-    // loadPok(responsApi);
-    // loadCharactersPokemons();
+    console.log(responsApi);
     displayCharacters(responsApi);
   } catch (err) {
     console.error(err);
@@ -29,14 +32,14 @@ async function loadCharactersNext() {
 }
 async function loadCharactersPrev() {
   postsEl.innerHTML = "";
+  --pageValue;
+  offset = pageValue * 42 - 42;
   try {
     const res = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=42"
+      "https://pokeapi.co/api/v2/pokemon?offset=" + offset + "&limit=42"
     );
     let hpCharac = await res.json();
     responsApi = hpCharac.results;
-    // loadPok(responsApi);
-    // loadCharactersPokemons();
     displayCharacters(responsApi);
   } catch (err) {
     console.error(err);
@@ -45,13 +48,11 @@ async function loadCharactersPrev() {
 sort__up.addEventListener("click", function () {
   postsEl.innerHTML = "";
   const sortA = responsApi.sort((a, b) => a.name.localeCompare(b.name));
-  // console.log(sortA);
   displayCharacters(sortA);
 });
 sort__down.addEventListener("click", function () {
   postsEl.innerHTML = "";
   const sortZ = responsApi.sort((a, b) => b.name.localeCompare(a.name));
-  // console.log(sortZ);
   displayCharacters(sortZ);
 });
 input.addEventListener("keyup", e => {
@@ -68,45 +69,48 @@ input.addEventListener("keyup", e => {
     sort__next.classList.remove("hide");
     sort__prev.classList.remove("hide");
   }
-  console.log(filterCgaracters, searchString);
   displayCharacters(filterCgaracters);
+  loader.style.display = "none";
 });
+
 async function loadCharactersPokemons() {
   try {
     const res = await fetch(
       "https://pokeapi.co/api/v2/pokemon?limit=42&offset=0"
     );
+
     let hpCharac = await res.json();
     responsApi = hpCharac.results;
-    // loadPok(responsApi);
     displayCharacters(responsApi);
+    loader.style.display = "none";
   } catch (err) {
     console.error(err);
+    postsEl.innerHTML = err;
+    loader.style.display = "none";
   }
 }
 loadCharactersPokemons();
 
 function displayCharacters(character) {
-  // console.log(character);
   character.forEach(element => {
     async function loadCharacters() {
       let res = await fetch(element.url)
         .then(res => res.json())
         .catch(err => console.log(err));
-      // console.log(res);
 
       const postMain = document.createElement("div");
-      // const  = document.querySelector(".favorites__cart");
       postMain.classList.add("main__post");
       const postLi = document.createElement("li");
       postLi.classList.add("post__list");
       const postA = document.createElement("a");
       postA.classList.add("post__link");
       postA.href = "?" + res.id;
-      const postIcon = document.createElement("img");
-      postIcon.style.width = "30px";
+      const postIcon = document.createElement("div");
+      postIcon.style.width = "26px";
+      postIcon.style.height = "26px";
+      postIcon.style.border = "1px solid black";
+      postIcon.style.borderRadius = "50%";
       postIcon.classList.add("postIcon");
-      postIcon.src = "./css/img/bookmark.png";
       postIcon.id = res.id;
       const postImg = document.createElement("img");
       postImg.src = res.sprites.front_shiny;
@@ -122,4 +126,3 @@ function displayCharacters(character) {
     loadCharacters();
   });
 }
-// console.log(event.target);
